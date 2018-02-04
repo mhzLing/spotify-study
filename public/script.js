@@ -17,6 +17,7 @@ $(document).ready(function() {
 });
 
 var testing = function(){
+  $('#playlistTitle').css('display', 'block');
   genre = $('#genre').val();
   $.ajax({
     url: 'https://api.spotify.com/v1/search?q='+ genre +'&type=playlist',
@@ -28,10 +29,10 @@ var testing = function(){
     {
       playlistUriArr[i] = data.playlists.items[i].uri;
     }
-    rand1 = Math.floor((Math.random() * data.playlists.items.length));
-    rand2 = Math.floor((Math.random() * data.playlists.items.length));
-    rand3 = Math.floor((Math.random() * data.playlists.items.length));
-    rand4 = Math.floor((Math.random() * data.playlists.items.length));
+    rand1 = Math.floor((Math.random() * 20));
+    rand2 = Math.floor((Math.random() * 20));
+    rand3 = Math.floor((Math.random() * 20));
+    rand4 = Math.floor((Math.random() * 20));
 
     $("#playbtn1").attr("src", 'https://open.spotify.com/embed?uri=' + playlistUriArr[rand1]);
     $("#playbtn2").attr("src", 'https://open.spotify.com/embed?uri=' + playlistUriArr[rand2]);

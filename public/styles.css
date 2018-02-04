@@ -95,3 +95,9 @@ iframe {
   margin-right: 5px;
   margin-left: 5px;
 }
+
+h2 {
+  color: #fff !important;
+  display: none;
+  margin-bottom: 18px;
+}
