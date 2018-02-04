@@ -8,6 +8,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 28px;
   padding-top: 0;
+  background-color: #333 !important;
 }
 
 #footer {
@@ -83,4 +84,9 @@ view) */
 
 .lead {
 text-align:left;
+}
+
+#subjectbox {
+  margin-right:auto;
+  margin-left:auto;
 }
