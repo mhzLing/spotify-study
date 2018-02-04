@@ -30,6 +30,14 @@
                     <div id="genre-container">
                         <select id='genre' data-placeholder="Choose a genre"
                               class="form-control input-md" tabindex="2">
+                              <option value='study'>Everything</option>
+                              <option value='classical'>Classical</option>
+                              <option value='white noise'>White Noise</option>
+                              <option value='atmospheric'>Atmospheric</option>
+                              <option value='electronic'>Electronic</option>
+                              <option value='lofi'>Chill Hop</option>
+                              <option value='jazz'>Jazz</option>
+                              <option value='movie'>Soundtracks</option>
                         </select>
                     </div>
                 </div>
@@ -47,11 +55,11 @@
       </div>
     </div>
 
-    <iframe src="https://open.spotify.com/embed?uri=spotify:user:erebore:playlist:788MOXyTfcUb1tdw4oC7KJ&theme=white&view=coverart"
-        frameborder="0" allowtransparency="true"></iframe>
-
     <div class="container" id="results">
-
+      <iframe id="playbtn1" src="" width="30%" height="380" frameborder="0" allowtransparency="true"></iframe>
+      <iframe id="playbtn2" src="" width="30%" height="380" frameborder="0" allowtransparency="true"></iframe>
+      <iframe id="playbtn3" src="" width="30%" height="380" frameborder="0" allowtransparency="true"></iframe>
+      <!--
         <div id='buttons'>
             <span id="play-buttons" class="btn-group">
               <button id='playPrev' class="btn btn-default"><i class="glyphicon glyphicon-backward"></i></button> </li>
@@ -61,10 +69,12 @@
             <button id='save' class="btn btn-primary pull-right">Save Playlist to Spotify</button>
         </div>
 
+
         <table id="song-table" class="table table-bordered table-striped table-hover">
             <thead> </thead>
             <tbody id="trows"> </tbody>
         </table>
+      -->
 
     </div>
   </body>

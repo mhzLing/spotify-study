@@ -90,3 +90,8 @@ text-align:left;
   margin-right:auto;
   margin-left:auto;
 }
+
+iframe {
+  margin-right: 5px;
+  margin-left: 5px;
+}

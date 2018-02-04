@@ -1,6 +1,14 @@
 var access_token = '';
 var refresh_token = '';
 
+var genre = 'study';
+var playlistUriArr = [];
+
+var rand1 = 0;
+var rand2 = 0;
+var rand3 = 0;
+var rand4 = 0;
+
 $(document).ready(function() {
   $.ajax({url: '/getTokens'}).done(function (data) {
     access_token = data.access_token;
@@ -9,37 +17,27 @@ $(document).ready(function() {
 });
 
 var testing = function(){
-  var genre = 'study';
-  var playlist = '';
-  var userId = '';
+  genre = $('#genre').val();
   $.ajax({
     url: 'https://api.spotify.com/v1/search?q='+ genre +'&type=playlist',
     headers: {
       'Authorization': 'Bearer ' + access_token
     },
   }).done(function (data) {
-
     for(var i = 0; i < data.playlists.items.length; i++)
     {
-      playlist = data.playlists.items[i].id;
-      userId = data.playlists.items[i].owner.id;
-
-      $.ajax({
-        url: 'https://api.spotify.com/v1/users/'+userId+'/playlists/'+playlist+'/tracks',
-        headers: {
-          'Authorization': 'Bearer ' + access_token
-        },
-      }).done(function (data1) {
-        var rand = Math.floor((Math.random() * data1.items.length));
-        console.log(data1.items[rand].track.uri);
-        /*11
-        for(var j = 0; j < data1.items.length; j++)
-        {
-          console.log(data1.items[j].track.uri);
-        }
-        */
-      });
+      playlistUriArr[i] = data.playlists.items[i].uri;
     }
+    rand1 = Math.floor((Math.random() * data.playlists.items.length));
+    rand2 = Math.floor((Math.random() * data.playlists.items.length));
+    rand3 = Math.floor((Math.random() * data.playlists.items.length));
+    rand4 = Math.floor((Math.random() * data.playlists.items.length));
+
+    $("#playbtn1").attr("src", 'https://open.spotify.com/embed?uri=' + playlistUriArr[rand1]);
+    $("#playbtn2").attr("src", 'https://open.spotify.com/embed?uri=' + playlistUriArr[rand2]);
+    $("#playbtn3").attr("src", 'https://open.spotify.com/embed?uri=' + playlistUriArr[rand3]);
+    $("#playbtn3").attr("src", 'https://open.spotify.com/embed?uri=' + playlistUriArr[rand4]);
+
   });
 
 }
