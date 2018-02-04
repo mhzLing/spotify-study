@@ -7,6 +7,7 @@
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
 
+
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
@@ -16,6 +17,8 @@ var client_id = 'c229c7097801480e9e396cc7c201edb6'; // Your client id
 var client_secret = 'df37f8e17dae4f1d87328051c2557c25'; // Your secret
 var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
 
+var access_token = '';
+var refresh_token = '';
 
 /**
  * Generates a random string containing numbers and letters
@@ -38,6 +41,9 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
+
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
 app.get('/login', function(req, res) {
 
@@ -88,8 +94,8 @@ app.get('/callback', function(req, res) {
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
 
-        var access_token = body.access_token,
-            refresh_token = body.refresh_token;
+        access_token = body.access_token;
+        refresh_token = body.refresh_token;
 
         var options = {
           url: 'https://api.spotify.com/v1/me',
@@ -103,11 +109,7 @@ app.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
+        res.render('home');
       } else {
         res.redirect('/#' +
           querystring.stringify({
@@ -121,7 +123,7 @@ app.get('/callback', function(req, res) {
 app.get('/refresh_token', function(req, res) {
 
   // requesting access token from refresh token
-  var refresh_token = req.query.refresh_token;
+  refresh_token = req.query.refresh_token;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
@@ -134,12 +136,20 @@ app.get('/refresh_token', function(req, res) {
 
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
-      var access_token = body.access_token;
+      access_token = body.access_token;
       res.send({
         'access_token': access_token
       });
     }
   });
+});
+
+app.get('/getTokens', function(req, res){
+  res.send({access_token: access_token, refresh_token: refresh_token});
+});
+
+app.get('*', function(req, res){
+  res.send("Hello World");
 });
 
 console.log('Listening on 3000');
