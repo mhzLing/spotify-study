@@ -1,0 +1,19 @@
+{
+  "name": "spotify-study",
+  "version": "1.0.0",
+  "description": "Spotify web app that suggests studying music based on what subject they enter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhzLing/spotify-study.git"
+  },
+  "author": "Morgan Ling, Minwoo Soh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhzLing/spotify-study/issues"
+  },
+  "homepage": "https://github.com/mhzLing/spotify-study#readme"
+}
